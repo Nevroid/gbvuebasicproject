@@ -3,22 +3,22 @@
     <input v-model.number="operand1" />
     <input v-model.number="operand2" />
     = {{ result }}
-    <div>
-      <button v-for="op in operations" :key="op" @click="calculate(op)"> {{ op }} </button>
+    <div class="operations">
+      <button class="button" v-for="op in operations" :key="op" @click="calculate(op)"> {{ op }} </button>
     </div>
-    <div>
+    <div class="keyboardTrigger">
       <input type="checkbox" id="keyboard-trigger" v-model="checked">
       <label for="keyboard-trigger">Клавиатура</label>
     </div>
-    <div v-if="checked">
+    <div class="selectOperand" v-if="checked">
       <div>
-        <input type="radio" name="fildSelect" id="operand1" value="1" v-model="picked">
+        <input type="radio" name="fildSelect" id="operand1" :value="true" v-model="picked">
         <label for="operand1">Операнд 1</label>
-        <input type="radio" name="fildSelect" id="operand2" value="" v-model="picked">
+        <input type="radio" name="fildSelect" id="operand2" :value="false" v-model="picked">
         <label for="operand2">Операнд 2</label>
       </div>
-      <div>
-      <button v-for="key in keyboard" :key="key" @click="sendKey(key)"> {{ key }} </button>
+      <div class="keyboard">
+      <button class="button" v-for="key in keyboard" :key="key" @click="sendKey(key)"> {{ key }} </button>
       </div>
     </div>
   </div>
@@ -33,7 +33,7 @@ export default {
     operations: ['+', '-', '/', '*', '**', 'int'],
     keyboard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '<--'],
     checked: false,
-    picked: '1'
+    picked: true
 
   }),
   methods: {
@@ -61,27 +61,21 @@ export default {
     },
     sendKey (key) {
       if (this.picked) {
-        switch (key) {
-          case '<--': {
-            const stringOperand = this.operand1.toString()
-            this.operand1 = Number(stringOperand.substring(0, stringOperand.length - 1))
-            break
-          }
-          default:
-            this.operand1 = Number('' + this.operand1 + key)
-            break
-        }
+        this.operand1 = this.applyKey(key, this.operand1)
       } else {
-        switch (key) {
-          case '<--': {
-            const stringOperand = this.operand2.toString()
-            this.operand2 = Number(stringOperand.substring(0, stringOperand.length - 1))
-            break
-          }
-          default:
-            this.operand2 = Number('' + this.operand2 + key)
-            break
+        this.operand2 = this.applyKey(key, this.operand2)
+      }
+    },
+    applyKey (key, operand) {
+      switch (key) {
+        case '<--': {
+          const stringOperand = operand.toString()
+          operand = Number(stringOperand.substring(0, stringOperand.length - 1))
+          return operand
         }
+        default:
+          operand = Number('' + operand + key)
+          return operand
       }
     }
   },
@@ -107,5 +101,20 @@ li {
 }
 a {
   color: #42b983;
+}
+.operations {
+  margin-top: 10px;
+}
+.button {
+  font-size: 18px;
+}
+.keyboardTrigger {
+  margin-top: 20px;
+}
+.selectOperand {
+  margin-top: 20px;
+}
+.keyboard {
+  margin-top: 20px;
 }
 </style>
