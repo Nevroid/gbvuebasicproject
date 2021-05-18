@@ -23,9 +23,6 @@ export default {
       headers: ['#', 'Date', 'Category', 'Spended']
     }
   },
-  props: {
-    items: Array
-  },
   computed: {
     ...mapGetters(['getCroppedPaymentList'])
   }

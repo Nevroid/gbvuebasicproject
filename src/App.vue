@@ -14,6 +14,8 @@ import PaymentForm from './components/PaymentForm'
 import ShowHideBtn from './components/ShowHideBtn'
 import Pagination from './components/Pagination'
 
+import { mapActions } from 'vuex'
+
 export default {
   name: 'App',
   components: {
@@ -29,9 +31,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['fetchData']),
     showForm (payload) {
       this.formState = payload
     }
+  },
+  mounted () {
+    this.fetchData()
   }
 }
 </script>
