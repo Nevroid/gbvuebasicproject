@@ -1,20 +1,22 @@
 <template>
   <div :class="[$style.pagination]">
     <span>--</span>
-    <span @click="changePage(page)" :class="[$style.page]" v-for="page in pages" :key="page" :ref="page">{{ page }}</span>
+    <span @click="changePage(page)" :class="[$style.page]" v-for="page in getTotalPagesCount" :key="page" :ref="page">{{ page }}</span>
     <span>--</span>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 export default {
-  props: {
-    pages: Number
-  },
   methods: {
-    changePage (page) {
-      this.$emit('test', page)
-    }
+    ...mapMutations(['changePage', 'countTotalPages'])
+  },
+  computed: {
+    ...mapGetters(['getTotalPagesCount'])
+  },
+  mounted () {
+    this.$store.commit('countTotalPages')
   }
 }
 </script>

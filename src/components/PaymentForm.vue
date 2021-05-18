@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   data () {
     return {
@@ -21,10 +23,10 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['addPaymentListData']),
     save () {
       const { date, category, spended } = this
-      this.$emit('paymentFormDataEmit', { date, category, spended })
-      this.$emit('recountPages')
+      this.addPaymentListData({ date, category, spended })
     }
   }
 }

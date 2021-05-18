@@ -4,7 +4,7 @@
         <tr>
             <th :class="[$style.th]" v-for="header in headers" :key="header">{{ header }}</th>
         </tr>
-        <tr :class="[$style.tr]" v-for="item in items" :key="item.index">
+        <tr :class="[$style.tr]" v-for="item in getCroppedPaymentList" :key="item.index">
             <td>{{ item.index }}</td>
             <td>{{ item.date }}</td>
             <td>{{ item.category }}</td>
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
@@ -23,7 +25,11 @@ export default {
   },
   props: {
     items: Array
+  },
+  computed: {
+    ...mapGetters(['getCroppedPaymentList'])
   }
+
 }
 </script>
 
