@@ -1,5 +1,10 @@
 <template>
   <div :class="[$style.form]">
+    <div :class="[$style.shortCuts]" @click="save">
+    <router-link to="/add/payment/Food?value=155">Food 155</router-link>
+    <router-link to="/add/payment/Grocery?value=15">Grocery 15</router-link>
+    <router-link to="/add/payment/Testotest?value=22455">Testotest 22455</router-link>
+    </div>
       <input :class="[$style.form__field]" type="date" placeholder="Date" v-model="date">
       <div :class="[$style.form__categoryBlock]">
         <select v-show="!showNewCat" :class="[$style.form__field]" v-model="category">
@@ -30,15 +35,39 @@ export default {
     ...mapMutations(['addPaymentListData']),
     save () {
       const { date, category, spended } = this
-      this.addPaymentListData({ date, category, spended })
+      if (this.category === '') {
+        console.log('Category is empty')
+      } else if (this.spended === 0 || isNaN(this.spended)) {
+        console.log('Value is not set')
+      } else {
+        this.addPaymentListData({ date, category, spended })
+      }
     },
     addNew () {
       this.showNewCat = !this.showNewCat
+    },
+    shortcut () {
+      console.log(this.$route.params.category)
+      console.log(+this.$route.query.value)
     }
   },
   computed: {
     ...mapGetters(['getPaymentCats'])
+  },
+  watch: {
+    '$route.params': function () {
+      this.date = new Date().toLocaleDateString()
+      this.category = this.$route.params.category
+      this.spended = +this.$route.query.value
+    }
+  },
+  mounted () {
+    this.date = new Date().toLocaleDateString()
+    this.category = this.$route.params.category
+    this.spended = +this.$route.query.value
+    console.log(this.date)
   }
+
 }
 </script>
 
@@ -49,6 +78,13 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+  }
+  .shortCuts {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
   .form__field {
     height: 40px;
