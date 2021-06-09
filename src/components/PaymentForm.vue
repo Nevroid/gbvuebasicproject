@@ -14,7 +14,7 @@
         <button v-show="showNewCat" :class="[$style.form__field]" @click="addNew">Close</button>
         <input v-show="showNewCat" type="text" placeholder="Add new" v-model="category" :class="[$style.form__field]">
       </div>
-      <input :class="[$style.form__field]" type="number" placeholder="Spended" v-model.number="spended">
+      <input :class="[$style.form__field]" type="number" placeholder="price" v-model.number="price">
       <button :class="[$style.form__field, $style.saveBtn]" @click="save">Save</button>
   </div>
 </template>
@@ -27,20 +27,20 @@ export default {
     return {
       date: '',
       category: '',
-      spended: 0,
+      price: 0,
       showNewCat: false
     }
   },
   methods: {
     ...mapMutations(['addPaymentListData']),
     save () {
-      const { date, category, spended } = this
+      const { date, category, price } = this
       if (this.category === '') {
         console.log('Category is empty')
-      } else if (this.spended === 0 || isNaN(this.spended)) {
+      } else if (this.price === 0 || isNaN(this.price)) {
         console.log('Value is not set')
       } else {
-        this.addPaymentListData({ date, category, spended })
+        this.addPaymentListData({ date, category, price })
       }
     },
     addNew () {
@@ -58,13 +58,13 @@ export default {
     '$route.params': function () {
       this.date = new Date().toLocaleDateString()
       this.category = this.$route.params.category
-      this.spended = +this.$route.query.value
+      this.price = +this.$route.query.value
     }
   },
   mounted () {
     this.date = new Date().toLocaleDateString()
     this.category = this.$route.params.category
-    this.spended = +this.$route.query.value
+    this.price = +this.$route.query.value
     console.log(this.date)
   }
 

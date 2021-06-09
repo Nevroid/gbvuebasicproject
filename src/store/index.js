@@ -34,6 +34,12 @@ export default new Vuex.Store({
     },
     changePage (state, payload) {
       state.currentPage = payload
+    },
+    editPaymentListData (state, payload) {
+      state.paymentList[payload.index] = payload
+    },
+    deletePaymentItem (state, payload) {
+      state.paymentList.splice(payload, 1)
     }
   },
   getters: {
@@ -51,43 +57,43 @@ export default new Vuex.Store({
               index: 0,
               date: '01-01-2021',
               category: 'Health',
-              spended: 100
+              price: 100
             },
             {
               index: 1,
               date: '02-01-2021',
               category: 'Food',
-              spended: 200
+              price: 200
             },
             {
               index: 2,
               date: '03-01-2021',
               category: 'Education',
-              spended: 300
+              price: 300
             },
             {
               index: 3,
               date: '04-01-2021',
               category: 'Health',
-              spended: 400
+              price: 400
             },
             {
               index: 4,
               date: '05-01-2021',
               category: 'Food',
-              spended: 500
+              price: 500
             },
             {
               index: 5,
               date: '06-01-2021',
               category: 'Food',
-              spended: 600
+              price: 600
             },
             {
               index: 6,
               date: '07-01-2021',
               category: 'Education',
-              spended: 700
+              price: 700
             }
           ])
         }, 1000)
