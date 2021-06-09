@@ -1,28 +1,46 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <Calc />
+    <h1>My expenses</h1>
+    <ShowHideBtn :msg="btnMsg" @clicked="showForm" />
+    <PaymentForm v-if="formState"/>
+    <PaymentList />
+    <Pagination />
   </div>
 </template>
 
 <script>
-import Calc from './components/Calc.vue'
+import PaymentList from './components/PaymentList'
+import PaymentForm from './components/PaymentForm'
+import ShowHideBtn from './components/ShowHideBtn'
+import Pagination from './components/Pagination'
+
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
   components: {
-    Calc
+    PaymentList,
+    PaymentForm,
+    ShowHideBtn,
+    Pagination
+  },
+  data () {
+    return {
+      btnMsg: 'ADD EXPENCE',
+      formState: false
+    }
+  },
+  methods: {
+    ...mapActions(['fetchData']),
+    showForm (payload) {
+      this.formState = payload
+    }
+  },
+  mounted () {
+    this.fetchData()
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" module>
 </style>
