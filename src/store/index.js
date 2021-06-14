@@ -7,8 +7,7 @@ export default new Vuex.Store({
   state: {
     paymentList: [],
     paymentCats: [],
-    currentPage: 1,
-    pages: 0
+    currentPage: 1
   },
   mutations: {
     setPaymentListData (state, payload) {
@@ -18,7 +17,6 @@ export default new Vuex.Store({
           state.paymentCats.push(element.category)
         }
       })
-      state.pages = (state.paymentList.length - (state.paymentList.length % 5)) / 5 + 1
     },
     addPaymentListData (state, payload) {
       if (!state.paymentCats.includes(payload.category)) {
@@ -27,13 +25,6 @@ export default new Vuex.Store({
       const indexList = state.paymentList.map(el => el.index)
       payload.index = indexList.length
       state.paymentList.push(payload)
-      state.pages = (state.paymentList.length - (state.paymentList.length % 5)) / 5 + 1
-    },
-    countTotalPages (state) {
-      state.pages = (state.paymentList.length - (state.paymentList.length % 5)) / 5 + 1
-    },
-    changePage (state, payload) {
-      state.currentPage = payload
     },
     editPaymentListData (state, payload) {
       state.paymentList[payload.index] = payload
@@ -44,8 +35,6 @@ export default new Vuex.Store({
   },
   getters: {
     getPaymentList: state => state.paymentList,
-    getCroppedPaymentList: state => state.paymentList.slice([5 * (state.currentPage - 1)], [5 * state.currentPage]),
-    getTotalPagesCount: state => state.pages,
     getPaymentCats: state => state.paymentCats
   },
   actions: {

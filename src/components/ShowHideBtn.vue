@@ -1,6 +1,5 @@
 <template>
-  <v-btn
-    @click="onClick"
+  <v-btn @click="onClick"
     color='teal'
     dark
   >
@@ -13,13 +12,13 @@
 export default {
   data () {
     return {
-      btnState: false
+      // btnState: false
     }
   },
   methods: {
     onClick () {
-      this.btnState = !this.btnState
-      this.$emit('clicked', this.btnState)
+      // this.btnState = !this.btnState
+      this.$emit('clicked')
     }
   }
 }
