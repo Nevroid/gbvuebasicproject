@@ -1,15 +1,5 @@
 <template>
   <div>
-    <!-- <input :class="[$style.form__field]" type="date" placeholder="Date" v-model="date">
-    <div :class="[$style.form__categoryBlock]">
-      <select v-show="!showNewCat" :class="[$style.form__field]" v-model="category">
-        <option v-for="option in this.getPaymentCats" :key="option" :value="option" >{{ option }}</option>
-      </select>
-      <v-btn dark color="teal"  v-show="!showNewCat" @click="addNew">Add new category</v-btn>
-      <v-btn dark color="teal" v-show="showNewCat" @click="addNew">Close</v-btn>
-      <input v-show="showNewCat" type="text" placeholder="Add new" v-model="category" :class="[$style.form__field]">
-    </div>
-    <input :class="[$style.form__field]" type="number" placeholder="price" v-model.number="price"> -->
     <v-form>
       <v-container>
         <v-row>
@@ -120,33 +110,3 @@ export default {
 
 }
 </script>
-
-<style lang="scss" module>
-  // .form {
-  //   height: 180px;
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: space-around;
-  // }
-  // .shortCuts {
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: space-between;
-  //   margin-top: 15px;
-  //   margin-bottom: 15px;
-  // }
-  // .form__field {
-  //   height: 40px;
-  //   border-radius: 16px;
-  //   padding-left: 20px;
-  //   padding-right: 20px;
-  // }
-  // .form__categoryBlock {
-  //   display: flex;
-  //   align-items: center;
-  // }
-  // .saveBtn {
-  //   color: white;
-  //   background: #22a698;
-  // }
-</style>

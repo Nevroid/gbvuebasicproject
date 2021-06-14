@@ -16,15 +16,6 @@
         <transition name="fade">
     <ModalMenu />
     </transition>
-    <!-- <v-row>
-      <v-col v-for="header in headers" :key="header">{{ header }}</v-col>
-    </v-row>
-    <v-row v-for="item in getPaymentList" :key="item.index">
-      <v-col>{{ item.index }}</v-col>
-      <v-col>{{ item.date }}</v-col>
-      <v-col>{{ item.category }}</v-col>
-      <v-col>{{ item.price }} <button @click="showContextMenu(item)">edit</button></v-col>
-    </v-row> -->
   <v-data-table
     :headers="headers"
     :items="getPaymentList"
@@ -60,7 +51,6 @@ export default {
         { text: 'Price', value: 'price' }
       ],
       formState: false
-      // headers: ['#', 'Date', 'Category', 'price']
     }
   },
   methods: {

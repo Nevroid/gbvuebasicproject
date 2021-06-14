@@ -8,7 +8,7 @@
               <PaymentList />
             </div>
           </v-col>
-          <v-col>Place chart here!</v-col>
+          <v-col><ChartWrapper /></v-col>
           <!-- <router-view/> -->
         </v-row>
       </v-container>
@@ -19,10 +19,12 @@
 <script>
 import PaymentList from './components/PaymentList'
 import { mapActions } from 'vuex'
+import ChartWrapper from './components/ChartWrapper'
 export default {
   name: 'App',
   components: {
-    PaymentList
+    PaymentList,
+    ChartWrapper
   },
   data () {
     return {}
