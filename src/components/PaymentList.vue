@@ -10,7 +10,7 @@
       v-slot:activator='{ on }'><ShowHideBtn v-on='on' @clicked="showForm"> ADD EXPENCE </ShowHideBtn>
     </template>
     <v-card>
-      <PaymentForm v-if="formState"/>
+      <PaymentForm @close='showForm' v-if="formState"/>
     </v-card>
     </v-dialog>
         <transition name="fade">

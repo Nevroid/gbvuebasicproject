@@ -4,9 +4,9 @@
       <v-container>
         <v-row>
           <v-col>
-            <v-btn @click="save" to="/add/payment/Food?value=155">Food 155</v-btn>
-            <v-btn @click="save" to="/add/payment/Grocery?value=15">Grocery 15</v-btn>
-            <v-btn @click="save" to="/add/payment/Testotest?value=22455">Testotest 22455</v-btn>
+            <v-btn @click="save" to="/add/payment/Food?value=155">Food-155</v-btn>
+            <v-btn @click="save" to="/add/payment/Grocery?value=15">Grocery-15</v-btn>
+            <v-btn @click="save" to="/add/payment/Transport?value=42">Transport-42</v-btn>
           </v-col>
         </v-row>
         <v-row justify="center">
@@ -82,6 +82,7 @@ export default {
       } else {
         this.addPaymentListData({ date, category, price })
       }
+      this.$emit('close')
     },
     addNew () {
       this.showNewCat = !this.showNewCat
