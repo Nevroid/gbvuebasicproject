@@ -8,7 +8,7 @@
               <PaymentList />
             </div>
           </v-col>
-          <v-col><ChartWrapper /></v-col>
+          <v-col align-self='center'><ChartWrapper /></v-col>
           <!-- <router-view/> -->
         </v-row>
       </v-container>

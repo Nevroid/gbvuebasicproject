@@ -1,3 +1,5 @@
+// import randomColor from 'randomcolor'
+import randomColor from 'randomcolor'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -7,6 +9,7 @@ export default new Vuex.Store({
   state: {
     paymentList: [],
     paymentCats: [],
+    chartData: [],
     currentPage: 1
   },
   mutations: {
@@ -31,11 +34,27 @@ export default new Vuex.Store({
     },
     deletePaymentItem (state, payload) {
       state.paymentList.splice(payload, 1)
+    },
+    gatherChartData (state, payload) {
+      state.chartData = [{ backgroundColor: [], data: [] }]
+      state.paymentCats.forEach(cat => {
+        let totalCatCost = 0
+        const thisCatItems = state.paymentList.filter(item => item.category === cat)
+        thisCatItems.forEach(item => {
+          totalCatCost = totalCatCost + item.price
+        })
+        state.chartData.forEach(item => {
+          item.backgroundColor.push(randomColor())
+          item.data.push(totalCatCost)
+        })
+      })
+      console.log(state.chartData)
     }
   },
   getters: {
     getPaymentList: state => state.paymentList,
-    getPaymentCats: state => state.paymentCats
+    getPaymentCats: state => state.paymentCats,
+    getChartData: state => state.chartData
   },
   actions: {
     fetchData ({ commit }) {

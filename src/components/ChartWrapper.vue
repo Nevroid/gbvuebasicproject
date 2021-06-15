@@ -1,16 +1,21 @@
 <template>
   <v-container>
-    <Doughnutchart
-      ref="skills_chart"
-      :chart-data="chartData"
-      :options="options">>
-    </Doughnutchart>>
+    <v-card v-if="chartFlag" width='300'>
+      <Doughnutchart
+        ref="skills_chart"
+        :chart-data="chartData"
+        :options="options">
+      </Doughnutchart>
+      <v-btn @click="showChart">Hide Chart</v-btn>
+      <v-btn @click="test">Test</v-btn>
+    </v-card>
+    <v-btn @click="showChart" v-if="!chartFlag">Show Chart</v-btn>
   </v-container>
 </template>
 
 <script>
 import Doughnutchart from './Doughnutchart.vue'
-import randomColor from 'randomcolor'
+import { mapGetters, mapMutations } from 'vuex'
 
 const options = {
   responsive: true,
@@ -24,17 +29,31 @@ export default {
   components: { Doughnutchart },
   data () {
     return {
+      chartFlag: false,
       options,
       chartData: {
-        labels: ['skill1', 'ssss2', 'ssssss3'],
-        datasets: [
-          {
-            backgroundColor: [randomColor(), randomColor(), randomColor()],
-            data: [1, 2, 4]
-          }
-        ]
+        labels: [],
+        datasets: []
       }
     }
+  },
+  methods: {
+    ...mapMutations(['gatherChartData']),
+    showChart () {
+      this.chartFlag = !this.chartFlag
+    },
+    test () {
+      this.gatherChartData()
+      console.log(this.chartData)
+    }
+  },
+  computed: {
+    ...mapGetters(['getPaymentCats', 'getChartData'])
+  },
+  mounted () {
+    this.gatherChartData()
+    this.chartData.labels = this.getPaymentCats
+    this.chartData.datasets = this.getChartData
   }
 }
 </script>
